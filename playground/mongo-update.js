@@ -24,8 +24,18 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
     // }); 
     
     // findOneAndDelete() returns  deleted documents as well
-    db.collection('User').findOneAndDelete({
-      name: 'saawan Fathers'
+    db.collection('User').findOneAndUpdate({
+     _id: new ObjectID('5bfeb6fce5c14b5cd3f3c0ef')
+    },{
+      $set: {
+        name: 'HemuDarling'
+      },
+      $inc: {
+          age: 2
+      }
+    },
+    {
+        returnOriginal: false
     }).then((result) => {
       console.log(JSON.stringify(result, undefined, 2));
     }, ( err ) => {
