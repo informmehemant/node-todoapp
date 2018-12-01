@@ -9,7 +9,7 @@ MongoClient.connect(url,{ useNewUrlParser: true} , (err, client)=> {
     // db.collection('Todos').find({_id: new ObjectID('5bfed192db2e1079de20fffc')}).toArray().then((doc) => { 
     //   console.log(JSON.stringify(doc, undefined, 2));
     // }, (err) => {
-    //   assert.equal(null, err);
+    //   assernst.equal(null, err);
     // });
     // db.collection('Todos').find().count().then((count)=>{
     //     console.log(`Total count ${count}`);
