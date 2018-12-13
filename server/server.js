@@ -11,6 +11,7 @@ const app = express();
 
 // creating a library middleware
 app.use(bodyParser.json());
+
 app.post('/todos', ( req, res ) => {
   let todo = new Todo({
       text: req.body.text
