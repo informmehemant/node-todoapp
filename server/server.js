@@ -9,7 +9,8 @@ const { Todo } = require('./models/todo');
 const { ObjectID } = require('mongodb');
 
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
+console.log(port);
 // creating a library middleware
 app.use(bodyParser.json());
 
@@ -49,7 +50,7 @@ app.get('/todos/:id', (req, res) => {
   });
 });
 app.listen( port, () => {
- console.log('listening on port 3000');
+ console.log(`listening on port ${port}`);
 });
 
 module.exports = { app };
