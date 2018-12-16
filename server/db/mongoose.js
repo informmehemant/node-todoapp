@@ -6,7 +6,7 @@ mongoose.connect(url, { useNewUrlParser: true }, (err) =>{
    assert.equal(null, err);
 });
 
-module.exports ={
+module.exports = {
     mongoose,
     assert
 };
