@@ -49,6 +49,22 @@ app.get('/todos/:id', (req, res) => {
     res.status(404).send({});
   });
 });
+// setting up routes deleted
+app.delete('/todos/:id', (req, res) => {
+  const id = req.params.id;
+  console.log(id)
+  if(!ObjectID.isValid(id)) {
+    res.sendStatus(400).send({});
+  }
+  Todo.findByIdAndRemove(id).then(todo => {
+    if(!todo) {
+      res.sendStatus(404).send({todo});
+    }
+    res.status(200).send({todo})
+  }).catch( e => {
+     res.sendStatus(400).send({});
+  });
+});
 app.listen( port, () => {
  console.log(`listening on port ${port}`);
 });
