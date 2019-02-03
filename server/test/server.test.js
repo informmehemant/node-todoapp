@@ -4,13 +4,16 @@ const { ObjectID } = require('mongodb');
 const { app } = require('../server');
 const { Todo } = require('../models/todo');
 
+const { assert } = require('chai');
 const todos = [{
     _id: new ObjectID(),
     text: 'Todos 1'
 },
 {
     _id: new ObjectID(),
-    text: 'Todos 2'
+    text: 'Todos 2',
+    complete: true,
+    completedAt: 333
 }];
 beforeEach((done) => {
  Todo.deleteMany({}).then(() =>  {
@@ -121,3 +124,34 @@ describe('Delete /todos/:id ', ( ) => {
    .end(done);
  });
 });
+
+describe('PATH todos/:id', () => {
+    it('should update the todos/id', (done) => {
+        var hexId = todos[0]._id.toHexString();
+        var updated = { text: 'Nodejs is the best', completed: true };
+        request(app)
+        .patch(`/todos/${hexId}`)
+        .send(updated)
+        .expect(200)
+        .expect((res) => {
+                expect(res.body.todo.text).toBe(updated.text);
+                expect(res.body.todo.completed).toBe(updated.completed);
+                assert.typeOf(res.body.todo.completedAt, 'number')
+        })
+        .end(done)
+        })
+        it('should update  the todos/id but the false one', (done) => {
+            var hexId = todos[1]._id.toHexString();
+            var updated = { text: 'Nodejs is the best', completed: false };
+            request(app)
+            .patch(`/todos/${hexId}`)
+            .send(updated)
+            .expect(200)
+            .expect((res) => {
+                    expect(res.body.todo.text).toBe(updated.text);
+                    assert.equal(res.body.todo.completed, false);
+                    assert.equal(res.body.todo.completedAt, null)
+            })
+            .end(done)
+            })
+    });
