@@ -125,7 +125,7 @@ describe('Delete /todos/:id ', ( ) => {
  });
 });
 
-describe('PATH todos/:id', () => {
+describe('PATCH todos/:id', () => {
     it('should update the todos/id', (done) => {
         var hexId = todos[0]._id.toHexString();
         var updated = { text: 'Nodejs is the best', completed: true };
